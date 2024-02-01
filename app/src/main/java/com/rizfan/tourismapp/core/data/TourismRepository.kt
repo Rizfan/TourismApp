@@ -1,7 +1,5 @@
 package com.rizfan.tourismapp.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.rizfan.tourismapp.core.data.source.local.LocalDataSource
 import com.rizfan.tourismapp.core.data.source.remote.RemoteDataSource
 import com.rizfan.tourismapp.core.data.source.remote.network.ApiResponse
@@ -10,6 +8,9 @@ import com.rizfan.tourismapp.core.utils.AppExecutors
 import com.rizfan.tourismapp.core.utils.DataMapper
 import com.rizfan.tourismapp.domain.model.Tourism
 import com.rizfan.tourismapp.domain.repository.ITourismRepository
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class TourismRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -31,30 +32,29 @@ class TourismRepository private constructor(
             }
     }
 
-    override fun getAllTourism(): LiveData<Resource<List<Tourism>>> =
-        object : NetworkBoundResource<List<Tourism>, List<TourismResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Tourism>> {
-                return localDataSource.getAllTourism().map {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+    override fun getAllTourism(): Flowable<Resource<List<Tourism>>> =
+        object : NetworkBoundResource<List<Tourism>, List<TourismResponse>>() {
+            override fun loadFromDB(): Flowable<List<Tourism>> {
+                return localDataSource.getAllTourism().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Tourism>?): Boolean =
                 data.isNullOrEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<TourismResponse>>> =
+            override fun createCall(): Flowable<ApiResponse<List<TourismResponse>>> =
                 remoteDataSource.getAllTourism()
 
             override fun saveCallResult(data: List<TourismResponse>) {
                 val tourismList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertTourism(tourismList)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
             }
-        }.asLiveData()
+        }.asFlowable()
 
-    override fun getFavoriteTourism(): LiveData<List<Tourism>> {
-        return localDataSource.getFavoriteTourism().map {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getFavoriteTourism(): Flowable<List<Tourism>> {
+        return localDataSource.getFavoriteTourism().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
     override fun setFavoriteTourism(tourism: Tourism, state: Boolean) {

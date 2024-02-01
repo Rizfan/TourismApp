@@ -56,6 +56,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
+    //RxJavaRoom
+    implementation("androidx.room:room-rxjava2:2.6.1")
+
     // Card
     implementation("androidx.cardview:cardview:1.0.0")
 
@@ -71,6 +74,7 @@ dependencies {
     // lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.6.2")
 
 
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
@@ -80,5 +84,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    //RXjava
+    implementation("io.reactivex.rxjava2:rxjava:2.2.19")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
 }
