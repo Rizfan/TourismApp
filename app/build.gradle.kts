@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("kotlin-kapt")
 //    id("kotlin-android-extensions")
-//    id("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -99,8 +99,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     //Dagger
-    implementation("com.google.dagger:dagger:2.48.1")
-    kapt("com.google.dagger:dagger-compiler:2.48.1")
+//    implementation("com.google.dagger:dagger:2.48.1")
+//    kapt("com.google.dagger:dagger-compiler:2.48.1")
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     //by viewModels di Activity dan Fragment
     implementation("androidx.activity:activity-ktx:1.8.2")

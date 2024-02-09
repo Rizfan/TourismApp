@@ -6,9 +6,12 @@ import com.rizfan.tourismapp.core.data.source.local.room.TourismDao
 import com.rizfan.tourismapp.core.data.source.local.room.TourismDatabase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DatabaseModule {
 
     @Singleton
