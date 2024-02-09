@@ -1,26 +1,38 @@
 package com.rizfan.tourismapp.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rizfan.tourismapp.MyApplication
+import com.rizfan.tourismapp.R
 import com.rizfan.tourismapp.core.data.Resource
 import com.rizfan.tourismapp.core.ui.TourismAdapter
 import com.rizfan.tourismapp.core.ui.ViewModelFactory
-import com.rizfan.tourismapp.detail.DetailTourismActivity
-import com.rizfan.tourismapp.R
 import com.rizfan.tourismapp.databinding.FragmentHomeBinding
+import com.rizfan.tourismapp.detail.DetailTourismActivity
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
+    @Inject
+    lateinit var factory: ViewModelFactory
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels {
+        factory
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -41,8 +53,6 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
             homeViewModel.tourism.observe(viewLifecycleOwner) { tourism ->
                 if (tourism != null) {

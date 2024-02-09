@@ -2,8 +2,10 @@ package com.rizfan.tourismapp.domain.usecase
 
 import com.rizfan.tourismapp.domain.model.Tourism
 import com.rizfan.tourismapp.domain.repository.ITourismRepository
+import javax.inject.Inject
 
-class TourismInteractor(private val tourismRepository: ITourismRepository): TourismUseCase {
+
+class TourismInteractor @Inject constructor(private val tourismRepository: ITourismRepository): TourismUseCase {
 
     override fun getAllTourism() = tourismRepository.getAllTourism()
 

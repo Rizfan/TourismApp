@@ -3,7 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("org.jetbrains.kotlin.kapt")
+    id("kotlin-kapt")
 //    id("kotlin-android-extensions")
+//    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -53,8 +55,10 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
+    //noinspection KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
 
     //RxJavaRoom
     implementation("androidx.room:room-rxjava2:2.6.1")
@@ -94,6 +98,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
+    //Dagger
+    implementation("com.google.dagger:dagger:2.48.1")
+    kapt("com.google.dagger:dagger-compiler:2.48.1")
 
+    //by viewModels di Activity dan Fragment
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
+    kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2")
 }
