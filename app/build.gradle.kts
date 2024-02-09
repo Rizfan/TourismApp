@@ -94,6 +94,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
+    //koin
+    implementation ("io.insert-koin:koin-core:2.2.3")
+    implementation ("io.insert-koin:koin-android:2.2.3")
+    implementation ("io.insert-koin:koin-android-viewmodel:2.2.3")
+
+
 
 
 }
