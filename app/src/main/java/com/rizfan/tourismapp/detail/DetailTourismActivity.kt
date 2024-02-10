@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.rizfan.tourismapp.R
 import com.rizfan.tourismapp.databinding.ActivityDetailTourismBinding
-import com.rizfan.tourismapp.domain.model.Tourism
+import com.rizfan.tourismapp.core.domain.model.Tourism
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailTourismActivity : AppCompatActivity() {

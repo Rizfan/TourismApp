@@ -1,8 +1,8 @@
 package com.rizfan.tourismapp.di
 
 import com.rizfan.tourismapp.detail.DetailTourismViewModel
-import com.rizfan.tourismapp.domain.usecase.TourismInteractor
-import com.rizfan.tourismapp.domain.usecase.TourismUseCase
+import com.rizfan.tourismapp.core.domain.usecase.TourismInteractor
+import com.rizfan.tourismapp.core.domain.usecase.TourismUseCase
 import com.rizfan.tourismapp.favorite.FavoriteViewModel
 import com.rizfan.tourismapp.home.HomeViewModel
 import org.koin.android.viewmodel.dsl.viewModel

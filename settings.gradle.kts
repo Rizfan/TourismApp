@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TourismApp"
 include(":app")
- 
+include(":core")
