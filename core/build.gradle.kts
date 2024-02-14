@@ -42,8 +42,6 @@ android {
 dependencies {
 
     implementation (fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
